@@ -11,12 +11,14 @@ class BrailleToLatin
     row0 = []
     row1 = []
     row2 = []
-require 'pry'; binding.pry
     string_arr2.each_with_index do |line, index|
       row0 << line if index % 3 == 0
       row1 << line if index % 3 == 1
       row2 << line if index % 3 == 2
     end
-    require 'pry'; binding.pry
+    all_chars = [row0,row1,row2].transpose.map{|char|char.join}
+    all_chars.map do |char|
+      @dictionary[char]
+    end.join
   end
 end
