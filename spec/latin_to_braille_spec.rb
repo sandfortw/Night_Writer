@@ -7,11 +7,9 @@ describe LatinToBraille do
       expect(LatinToBraille.translate(string)).to eq("O.\nOO\n..")
     end
 
-    xit 'translates "hello world"' do
+    it 'translates "hello world"' do
       string = 'hello world'
-      expect(LatinToBraille.translate(string)).to eq('0.0.0.0.0....00.0.0.00
-                                                      00.00.0..0..00.0000..0
-                                                      ....0.0.0....00.0.0...')
+      expect(LatinToBraille.translate(string)).to eq("O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O...")
     end
   end
  
