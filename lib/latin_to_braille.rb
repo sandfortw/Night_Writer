@@ -49,7 +49,7 @@ class LatinToBraille
       row2 << @dictionary[char][2]
     end
     paragraph << "#{row0.join}\n#{row1.join}\n#{row2.join}"
-    paragraph.join("\n\n")
+    paragraph.join("\n")
   end
 
 
