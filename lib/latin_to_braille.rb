@@ -36,13 +36,21 @@ class LatinToBraille
     row0 = []
     row1 = []
     row2 = []
-    
+    paragraph = []
     string.chars.each do |char|
+      if row0.count % 20 == 0 && row0 != []
+        paragraph << "#{row0.join}\n#{row1.join}\n#{row2.join}"
+        row0 = []
+        row1 = []
+        row2 = []
+      end
       row0 << @dictionary[char][0]
       row1 << @dictionary[char][1]
       row2 << @dictionary[char][2]
     end
-    "#{row0.join}\n#{row1.join}\n#{row2.join}"
+    paragraph << "#{row0.join}\n#{row1.join}\n#{row2.join}"
+    paragraph.join("\n\n")
   end
+
 
 end
