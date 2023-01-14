@@ -1,4 +1,4 @@
-require 'latin_to_braille.rb'
+require './lib/latin_to_braille.rb'
 class BrailleToLatin
 
   @dictionary = {}
