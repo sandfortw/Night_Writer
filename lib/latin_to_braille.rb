@@ -1,5 +1,5 @@
 class LatinToBraille
-
+  
 
     @dictionary = {
       'a' => ['O.', '..', '..'],
@@ -52,5 +52,7 @@ class LatinToBraille
     paragraph.join("\n")
   end
 
-
+  def self.dictionary
+    @dictionary
+  end
 end

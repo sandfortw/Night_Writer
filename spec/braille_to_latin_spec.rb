@@ -7,8 +7,8 @@ describe BrailleToLatin do
       expect(BrailleToLatin.translate(string_arr)).to eq('h')
     end
 
-    xit 'translates "hello world"' do
-      string = "O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O..."
+    it 'translates "hello world"' do
+      string = ["O.O.O.O.O....OO.O.O.OO\n","OO.OO.O..O..OO.OOOO..O\n","....O.O.O....OO.O.O..."]
       expect(BrailleToLatin.translate(string)).to eq('hello world')
     end
 
