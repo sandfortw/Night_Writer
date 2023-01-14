@@ -1,10 +1,10 @@
 class LatinToBraille
-
+  
 
     @dictionary = {
       'a' => ['O.', '..', '..'],
       'b' => ['O.', 'O.', '..'],
-      'c' => ['OO', 'O.', '..'],
+      'c' => ['OO', '..', '..'],
       'd' => ['OO', '.O', '..'],
       'e' => ['O.', '.O', '..'],
       'f' => ['OO', 'O.', '..'],
@@ -49,8 +49,10 @@ class LatinToBraille
       row2 << @dictionary[char][2]
     end
     paragraph << "#{row0.join}\n#{row1.join}\n#{row2.join}"
-    paragraph.join("\n\n")
+    paragraph.join("\n")
   end
 
-
+  def self.dictionary
+    @dictionary
+  end
 end
