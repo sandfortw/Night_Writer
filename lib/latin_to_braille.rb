@@ -1,6 +1,6 @@
 class LatinToBraille
 
-  def initialize
+
     @dictionary = {
       'a' => ['O.', '..', '..'],
       'b' => ['O.', 'O.', '..'],
@@ -29,5 +29,19 @@ class LatinToBraille
       'y' => ['OO', '.O', 'OO'],
       'z' => ['O.', '.O', 'OO'],
     }
+
+
+  def self.translate(string)
+    row0 = []
+    row1 = []
+    row2 = []
+    
+    string.chars.each do |char|
+      row0 << @dictionary[char][0]
+      row1 << @dictionary[char][1]
+      row2 << @dictionary[char][2]
+    end
+    "#{row0.join}\n#{row1.join}\n#{row2.join}"
   end
+
 end
