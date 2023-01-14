@@ -38,7 +38,7 @@ class LatinToBraille
     row2 = []
     paragraph = []
     string.chars.each do |char|
-      if row0.count % 20 == 0 && row0 != []
+      if row0.count % 40 == 0 && row0 != []
         paragraph << "#{row0.join}\n#{row1.join}\n#{row2.join}"
         row0 = []
         row1 = []
