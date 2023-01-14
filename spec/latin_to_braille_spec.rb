@@ -12,10 +12,9 @@ describe LatinToBraille do
       expect(LatinToBraille.translate(string)).to eq("O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O...")
     end
 
-    xit 'can break at 40 chars' do
-      string = "the quick brown fox jumps over the lazy dog the quick brown fox jumps over the lazy dog"
-      expect(LatinToBraille.translate(string)).to eq("........................................\n........................................\n........................................\n\n
-                                                               ........................................\n........................................\n........................................\n")
+    it 'can break at 40 chars' do
+      string = "                                        "
+      expect(LatinToBraille.translate(string)).to eq("........................................\n........................................\n........................................\n\n........................................\n........................................\n........................................\n")
     end
   end
  
