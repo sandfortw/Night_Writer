@@ -60,6 +60,7 @@ class LatinToBraille
   end
  
   def self.filter(string)
+    string = numfilter(string)
     new_string = []
     string.each_char do |c|
       new_string << '^' if /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.match?(c)
