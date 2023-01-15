@@ -17,6 +17,11 @@ describe LatinToBraille do
       expect(LatinToBraille.translate(string)).to eq("................................................................................\n................................................................................\n................................................................................")
     end
 
+    it 'can filter characters' do
+      string = 'H'
+      expect(LatinToBraille.filter(string)).to eq('^h')
+    end
+    
     it 'supports an uppercase letter' do
       string = 'H'
       expect(LatinToBraille.translate(string)).to eq("..O.\n..OO\n.O..")
