@@ -11,6 +11,11 @@ describe BrailleToLatin do
       string = ["O.O.O.O.O....OO.O.O.OO\n","OO.OO.O..O..OO.OOOO..O\n","....O.O.O....OO.O.O..."]
       expect(BrailleToLatin.translate(string)).to eq('hello world')
     end
+
+    it 'translates "1Hello World' do
+      string = [".OO...O.O.O.O.O......OO.O.O.OO\n", ".O....OO.OO.O..O....OO.OOOO..O\n", "OO...O....O.O.O....O.OO.O.O..."]
+      expect(BrailleToLatin.translate(string)).to eq('1Hello World')
+    end
   end
 
   describe '.unfilter(string)' do
