@@ -38,6 +38,11 @@ describe LatinToBraille do
       string = '1'
       expect(LatinToBraille.numfilter(string)).to eq('§a')
     end
+
+    it 'translates 1Hello 2World' do
+      string = '1Hello World'
+      expect(LatinToBraille.translate(string)).to eq(".OO...O.O.O.O.O......OO.O.O.OO\n.O....OO.OO.O..O....OO.OOOO..O\nOO...O....O.O.O....O.OO.O.O...")
+    end
   end
  
 end
