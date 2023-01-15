@@ -43,6 +43,7 @@ class LatinToBraille
   end
 
   def self.translate(string)
+    string = filter(string)
     row0 = []
     row1 = []
     row2 = []

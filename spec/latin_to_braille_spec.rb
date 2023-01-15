@@ -25,12 +25,12 @@ describe LatinToBraille do
 
     end
 
-    xit 'supports an uppercase letter' do
+    it 'supports an uppercase letter' do
       string = 'H'
       expect(LatinToBraille.translate(string)).to eq("..O.\n..OO\n.O..")
     end
 
-    xit 'translates Hello World' do
+    it 'translates Hello World' do
       string = 'Hello World'
       expect(LatinToBraille.translate(string)).to eq("..O.O.O.O.O......OO.O.O.OO\n..OO.OO.O..O....OO.OOOO..O\n.O....O.O.O....O.OO.O.O...")
     end
