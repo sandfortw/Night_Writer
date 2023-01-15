@@ -28,9 +28,19 @@ class LatinToBraille
       'x' => ['OO', '..', 'OO'],
       'y' => ['OO', '.O', 'OO'],
       'z' => ['O.', '.O', 'OO'],
-      ' ' => ['..', '..', '..']
+      ' ' => ['..', '..', '..'],
+      '^' => ['..', '..', '.O'],
     }
 
+
+  def self.filter(string)
+    new_string = []
+    string.each_char do |c|
+      new_string << '^' if /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.match?(c)
+      new_string << c.downcase
+    end
+    new_string.join
+  end
 
   def self.translate(string)
     row0 = []
