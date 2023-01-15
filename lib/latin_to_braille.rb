@@ -28,11 +28,49 @@ class LatinToBraille
       'x' => ['OO', '..', 'OO'],
       'y' => ['OO', '.O', 'OO'],
       'z' => ['O.', '.O', 'OO'],
-      ' ' => ['..', '..', '..']
+      ' ' => ['..', '..', '..'],
+      '^' => ['..', '..', '.O'],
+      '§' => ['.O', '.O', 'OO'],
     }
 
+    @numdict = {
+      '1' => @dictionary.keys[0],
+      '2' => @dictionary.keys[1],
+      '3' => @dictionary.keys[2],
+      '4' => @dictionary.keys[3],
+      '5' => @dictionary.keys[4],
+      '6' => @dictionary.keys[5],
+      '7' => @dictionary.keys[6],
+      '8' => @dictionary.keys[7],
+      '9' => @dictionary.keys[8],
+      '0' => @dictionary.keys[9]
+    }
+
+  def self.numfilter(string)
+    new_string = []
+    string.each_char do |c|
+      if /[1234567890]/.match?(c)
+        new_string << '§' 
+        new_string << @numdict[c]
+      else
+        new_string << c
+      end
+    end
+    new_string.join
+  end
+ 
+  def self.filter(string)
+    string = numfilter(string)
+    new_string = []
+    string.each_char do |c|
+      new_string << '^' if /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.match?(c)
+      new_string << c.downcase
+    end
+    new_string.join
+  end
 
   def self.translate(string)
+    string = filter(string)
     row0 = []
     row1 = []
     row2 = []
