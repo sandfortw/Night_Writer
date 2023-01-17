@@ -20,52 +20,60 @@ class BrailleToLatin
     @dictionary[braille.join] = latin
   end
 
-
   def self.unfilter(string)
-    new_string = []
-    chr_arr = string.chars
-    chr_arr.each_with_index do |char, index|
-      if chr_arr[index-1] == '^'
-        new_string << char.upcase
-      elsif chr_arr[index-1] == '§'
-        new_string << @numdict[char]
-      else
-        new_string << char unless char == '§' || char == '^'
-      end
+    new_string = ""
+    string.chars.each_with_index do |char, index|
+      transformed = transformed_char(char, index, string) 
+      new_string << transformed unless transformed.nil?
     end
-    new_string.join
+    new_string
+  end
+  
+  def self.transformed_char(char, index, string)
+    if string[index-1] == '^'
+      char.upcase
+    elsif string[index-1] == '§'
+      @numdict[char]
+    else
+      char unless char == '§' || char == '^'
+    end
   end
 
-
   def self.translate(string_arr)
-    string_arr2 = string_arr.map{|line| line.chomp}
-    row0 = []
-    row1 = []
-    row2 = []
-    string_arr2.each_with_index do |line, index|
-      row0 << line if index % 3 == 0
-      row1 << line if index % 3 == 1
-      row2 << line if index % 3 == 2
-    end
-    all_chars = [break_row_by_2s(row0),break_row_by_2s(row1),break_row_by_2s(row2)].transpose.map{|char|char.join}
-    string = all_chars.map do |char|
-      @dictionary[char]
-    end.join
-
+    braille_lines = delete_line_breaks(string_arr)
+    row_hash = generate_rows(braille_lines)
+    string = generate_chars(row_hash)
     unfilter(string)
+  end
+
+  def self.generate_chars(hash)
+    by_twos = [break_row_by_2s(hash[:row0]),break_row_by_2s(hash[:row1]),break_row_by_2s(hash[:row2])]
+    all_braille_chars = by_twos.transpose.map{|char|char.join}
+    all_braille_chars.map {|char| @dictionary[char] }.join
+  end
+
+  def self.delete_line_breaks(array)
+    array.map{|line| line.chomp}
+  end
+
+  def self.generate_rows(array)
+    row_hash = {row0: [], row1: [], row2: []}
+    array.each_with_index do |line, index|
+      row_hash[:row0] << line if index % 3 == 0
+      row_hash[:row1] << line if index % 3 == 1
+      row_hash[:row2] << line if index % 3 == 2
+    end
+    row_hash
   end
 
 
   def self.break_row_by_2s(row)
-    rowzero = []
+    by_twos = []
     row.join.chars.each_with_index do |char, index|
-      if index.odd? 
-        rowzero <<"#{char},"
-      else
-        rowzero<<char
-      end
+      by_twos << char
+      by_twos << "," if index.odd?
     end
-    rowzero.join.split(',')
+    by_twos.join.split(',')
   end
 
 end
