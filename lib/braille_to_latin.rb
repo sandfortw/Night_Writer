@@ -49,10 +49,7 @@ class BrailleToLatin
   def self.generate_chars(hash)
     by_twos = [break_row_by_2s(hash[:row0]),break_row_by_2s(hash[:row1]),break_row_by_2s(hash[:row2])]
     all_braille_chars = by_twos.transpose.map{|char|char.join}
-    string = all_braille_chars.map do |char|
-      @dictionary[char]
-    end.join
-    string
+    all_braille_chars.map {|char| @dictionary[char] }.join
   end
 
   def self.delete_line_breaks(array)
@@ -71,15 +68,12 @@ class BrailleToLatin
 
 
   def self.break_row_by_2s(row)
-    rowzero = []
+    by_twos = []
     row.join.chars.each_with_index do |char, index|
-      if index.odd? 
-        rowzero << "#{char},"
-      else
-        rowzero << char
-      end
+      by_twos << char
+      by_twos << "," if index.odd?
     end
-    rowzero.join.split(',')
+    by_twos.join.split(',')
   end
 
 end
