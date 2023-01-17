@@ -3,23 +3,18 @@ require './lib/braille_to_latin'
 class NightWriterReader
 
   def self.encode_file_to_braille
-    base_file_name = ARGV[0]
-    new_file_name = ARGV[1]
-    file0 = File.open("./data/#{base_file_name}")
+    file0 = File.open("./data/#{ARGV[0]}")
     string = file0.read
-    file1 = File.open("./data/#{new_file_name}", 'w')
+    file1 = File.open("./data/#{ARGV[1]}", 'w')
     file1.write(LatinToBraille.translate(string))
     print_string(string)
   end
 
   def self.decode_file_to_latin 
-    base_file_name = ARGV[0]
-    new_file_name = ARGV[1]
-    file0 = File.open("./data/#{base_file_name}")
+    file0 = File.open("./data/#{ARGV[0]}")
     string_arr = IO.readlines(file0)
-    file1 = File.open("./data/#{new_file_name}", 'w')
+    file1 = File.open("./data/#{ARGV[1]}", 'w')
     string = BrailleToLatin.translate(string_arr)
-    require 'pry'; binding.pry
     file1.write(string)
     print_string(string)
   end
