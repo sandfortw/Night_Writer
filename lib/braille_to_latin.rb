@@ -40,21 +40,33 @@ class BrailleToLatin
   end
 
   def self.translate(string_arr)
-    string_arr2 = string_arr.map{|line| line.chomp}
-    row0 = []
-    row1 = []
-    row2 = []
-    string_arr2.each_with_index do |line, index|
-      row0 << line if index % 3 == 0
-      row1 << line if index % 3 == 1
-      row2 << line if index % 3 == 2
-    end
-    all_chars = [break_row_by_2s(row0),break_row_by_2s(row1),break_row_by_2s(row2)].transpose.map{|char|char.join}
-    string = all_chars.map do |char|
+    braille_lines = delete_line_breaks(string_arr)
+    row_hash = generate_rows(braille_lines)
+    string = generate_chars(row_hash)
+    unfilter(string)
+  end
+
+  def self.generate_chars(hash)
+    by_twos = [break_row_by_2s(hash[:row0]),break_row_by_2s(hash[:row1]),break_row_by_2s(hash[:row2])]
+    all_braille_chars = by_twos.transpose.map{|char|char.join}
+    string = all_braille_chars.map do |char|
       @dictionary[char]
     end.join
+    string
+  end
 
-    unfilter(string)
+  def self.delete_line_breaks(array)
+    array.map{|line| line.chomp}
+  end
+
+  def self.generate_rows(array)
+    row_hash = {row0: [], row1: [], row2: []}
+    array.each_with_index do |line, index|
+      row_hash[:row0] << line if index % 3 == 0
+      row_hash[:row1] << line if index % 3 == 1
+      row_hash[:row2] << line if index % 3 == 2
+    end
+    row_hash
   end
 
 
@@ -62,9 +74,9 @@ class BrailleToLatin
     rowzero = []
     row.join.chars.each_with_index do |char, index|
       if index.odd? 
-        rowzero <<"#{char},"
+        rowzero << "#{char},"
       else
-        rowzero<<char
+        rowzero << char
       end
     end
     rowzero.join.split(',')
