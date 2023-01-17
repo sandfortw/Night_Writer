@@ -87,17 +87,19 @@ class LatinToBraille
     hash
   end
 
+  def self.push_and_clear(row_hash)
+    row_clear(paragraph_push(row_hash))
+  end
+
   def self.paragraph_create(string)
     row_hash = { row0: [], row1: [], row2: [], paragraph: []}
     string.chars.each do |char|
       if row_hash[:row0].count % 40 == 0 && row_hash[:row0] != []
-        row_hash = paragraph_push(row_hash)
-        row_hash = row_clear(row_hash)
+        row_hash = push_and_clear(row_hash)
       end
       row_hash = row_push(row_hash, char)
     end
-   row_hash = paragraph_push(row_hash)
-   row_hash[:paragraph].join("\n")
+    paragraph_push(row_hash)[:paragraph].join("\n")
   end
 
   def self.row_push(row_hash, char)
