@@ -71,28 +71,40 @@ class LatinToBraille
   end
 
   def self.translate(string)
-    paragraph_create(filter(string)).join("\n")
+    string = filter(string)
+    paragraph_create(string)
   end
 
-  def self.paragraph_push_and_rowclear(row_hash)
+  def self.paragraph_push(row_hash)
     row_hash[:paragraph] << "#{row_hash[:row0].join}\n#{row_hash[:row1].join}\n#{row_hash[:row2].join}"
-    row_hash[:row0] = row_hash[:row1] = row_hash[:row2] = []
     row_hash
   end
 
+  def self.row_clear(hash)
+    hash[:row0] = []
+    hash[:row1] = []
+    hash[:row2] = []
+    hash
+  end
+
   def self.paragraph_create(string)
-    row_hash = { row0: [], row1: [], row2: [], row3: [], paragraph: [] }
+    row_hash = { row0: [], row1: [], row2: [], paragraph: []}
     string.chars.each do |char|
-      row_hash = paragraph_push_and_rowclear(row_hash) if row_hash[:row0].count % 40 == 0 && row_hash[:row0] != []
-      row_push(row_hash, char)
+      if row_hash[:row0].count % 40 == 0 && row_hash[:row0] != []
+        row_hash = paragraph_push(row_hash)
+        row_hash = row_clear(row_hash)
+      end
+      row_hash = row_push(row_hash, char)
     end
-    paragraph_push_and_rowclear(row_hash)[:paragraph]
+   row_hash = paragraph_push(row_hash)
+   row_hash[:paragraph].join("\n")
   end
 
   def self.row_push(row_hash, char)
     row_hash[:row0] << @dictionary[char][0]
     row_hash[:row1] << @dictionary[char][1]
     row_hash[:row2] << @dictionary[char][2]
+    row_hash
   end
 
   def self.dictionary
