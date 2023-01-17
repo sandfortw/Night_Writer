@@ -2,20 +2,48 @@ require './lib/latin_to_braille'
 describe LatinToBraille do
 
   describe '.translate(file)' do
-    it 'translates single characters' do
-      string = 'h'
-      expect(LatinToBraille.translate(string)).to eq("O.\nOO\n..")
+
+    describe 'single lowercase characters and spaces' do
+      it 'translates a space' do
+        string = ' '
+        expect(LatinToBraille.translate(string)).to eq("..\n..\n..")
+      end
+      it 'translates "h"' do
+        string = 'h'
+        expect(LatinToBraille.translate(string)).to eq("O.\nOO\n..")
+      end
+
+      it 'translates "a' do
+        string = 'a'
+        expect(LatinToBraille.translate(string)).to eq("O.\n..\n..")
+      end
     end
 
-    it 'translates "hello world"' do
-      string = 'hello world'
-      expect(LatinToBraille.translate(string)).to eq("O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O...")
+    describe 'multiple lowercase characters' do
+      it 'translates "ab"' do
+        string = 'ab'
+        expect(LatinToBraille.translate(string)).to eq("O.O.\n..O.\n....")
+      end
+
+      it 'translates "hello world"' do
+        string = 'hello world'
+        expect(LatinToBraille.translate(string)).to eq("O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O...")
+      end
     end
 
-    it 'can break at 40 chars' do
-      string = "                                        "
-      expect(LatinToBraille.translate(string)).to eq("................................................................................\n................................................................................\n................................................................................")
+    describe '80 positions wide' do
+      it 'can break at 41 chars (spaces)' do
+        string = "                                         "
+        expect(LatinToBraille.translate(string)).to eq("................................................................................\n................................................................................\n................................................................................\n..\n..\n..")
+      end
+
+      it 'can break at 41 chars(letter "a")' do
+        string = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        expect(LatinToBraille.translate(string)).to eq("O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.O.\n................................................................................\n................................................................................\nO.\n..\n..")
+      end
     end
+
+    
 
     it 'can filter characters' do
       string = 'H'
