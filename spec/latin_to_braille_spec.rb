@@ -72,6 +72,11 @@ describe LatinToBraille do
       expect(LatinToBraille.filter(string)).to eq('^h^i')
     end
 
+    it 'can add upcase character for all letters' do
+      string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+      expect(LatinToBraille.filter(string)).to eq('^a^b^c^d^e^f^g^h^i^j^k^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z')
+    end
+
   end
 
   describe 'adding special char before numbers' do
@@ -88,7 +93,7 @@ describe LatinToBraille do
     it 'adds char before all numbers' do
       string = '1234567890'
       expect(LatinToBraille.numfilter(string)).to eq('§a§b§c§d§e§f§g§h§i§j')
-
     end
+
   end
 end
