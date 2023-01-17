@@ -30,14 +30,29 @@ describe LatinToBraille do
         expect(LatinToBraille.translate(string)).to eq("O.O.O.O.O....OO.O.O.OO\nOO.OO.O..O..OO.OOOO..O\n....O.O.O....OO.O.O...")
       end
     end
-    it 'supports an uppercase letter' do
-      string = 'H'
-      expect(LatinToBraille.translate(string)).to eq("..O.\n..OO\n.O..")
-    end
 
-    it 'translates Hello World' do
-      string = 'Hello World'
-      expect(LatinToBraille.translate(string)).to eq("..O.O.O.O.O......OO.O.O.OO\n..OO.OO.O..O....OO.OOOO..O\n.O....O.O.O....O.OO.O.O...")
+    describe 'upcase letters' do
+      it 'supports an uppercase letter' do
+        string = 'H'
+        expect(LatinToBraille.translate(string)).to eq("..O.\n..OO\n.O..")
+      end
+  
+      it 'translates Hello World' do
+        string = 'Hello World'
+        expect(LatinToBraille.translate(string)).to eq("..O.O.O.O.O......OO.O.O.OO\n..OO.OO.O..O....OO.OOOO..O\n.O....O.O.O....O.OO.O.O...")
+      end
+    end
+   
+    describe 'numbers' do
+      it 'supports a number' do
+        string = '1'
+        expect(LatinToBraille.translate(string)).to eq(".OO.\n.O..\nOO..")
+      end
+
+      it 'supports all numbers' do
+        string = '1234567890'
+        expect(LatinToBraille.translate(string)).to eq(".OO..OO..OOO.OOO.OO..OOO.OOO.OO..O.O.O.O\n.O...OO..O...O.O.O.O.OO..OOO.OOO.OO..OOO\nOO..OO..OO..OO..OO..OO..OO..OO..OO..OO..")
+      end
     end
 
     
@@ -94,6 +109,6 @@ describe LatinToBraille do
       string = '1234567890'
       expect(LatinToBraille.numfilter(string)).to eq('§a§b§c§d§e§f§g§h§i§j')
     end
-
   end
+
 end
