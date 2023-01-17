@@ -46,4 +46,10 @@ describe BrailleToLatin do
     end
   end
  
+  describe '.generate_chars(hash)' do
+    it 'returns a character hash of rows' do
+      hash = {:row0=>["O."], :row1=>["OO"], :row2=>[".."]}
+      expect(BrailleToLatin.generate_chars(hash)).to eq("h")
+    end
+  end
 end
