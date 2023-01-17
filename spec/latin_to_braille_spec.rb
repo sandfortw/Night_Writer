@@ -131,7 +131,7 @@ describe LatinToBraille do
 
       it 'can clear rows' do
         row_hash = { row0: ['O.'], row1: ['..'], row2: ['..'], paragraph: []}
-
+        expect(LatinToBraille.row_clear(row_hash)).to eq({ row0: [], row1: [], row2: [], paragraph: []})
       end
 
       xit 'can push rows into a "paragraph" array' do
