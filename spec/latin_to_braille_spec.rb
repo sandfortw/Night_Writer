@@ -144,6 +144,20 @@ describe LatinToBraille do
         expect(LatinToBraille.push_and_clear(row_hash)).to eq({ row0: [], row1: [], row2: [], paragraph: ["O.\n..\n.."]})
       end
     end
+
+    describe 'creating a paragraph' do
+      
+      it 'creates a string with braille lines' do
+        string = 'a^a§a'
+        expect(LatinToBraille.paragraph_create(string)).to eq("O...O..OO.\n.......O..\n...O..OO..")
+      end
+
+      it 'works with .filter method' do
+        string = 'aA1'
+        string = LatinToBraille.filter(string)
+        expect(LatinToBraille.paragraph_create(string)).to eq("O...O..OO.\n.......O..\n...O..OO..")
+      end
+    end
   end
 
 end
