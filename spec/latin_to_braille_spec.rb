@@ -1,4 +1,6 @@
 require './lib/latin_to_braille'
+require './spec/spec_helper.rb'
+
 describe LatinToBraille do
 
   describe '.translate(file)' do

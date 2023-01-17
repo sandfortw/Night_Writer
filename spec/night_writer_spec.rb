@@ -1,3 +1,5 @@
+require './spec/spec_helper.rb'
+
 describe "test for night_writer" do
   let(:argv) { ['message.txt', 'braille.txt'] }    
 
