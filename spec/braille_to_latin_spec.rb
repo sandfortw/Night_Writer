@@ -31,5 +31,19 @@ describe BrailleToLatin do
       expect(BrailleToLatin.unfilter(string)).to eq("1")
     end
   end
+
+  describe '.delete_line_breaks(array)' do
+    it 'deletes the linebreaks from an array of strings' do
+      string_array = ["O.\n", "OO\n", ".."]
+      expect(BrailleToLatin.delete_line_breaks(string_array)).to eq(["O.", "OO", ".."])
+    end
+  end
+
+  describe '.generate_rows(array)' do
+    it 'generates rows' do
+      string_array = ["O.", "OO", ".."]
+      expect(BrailleToLatin.generate_rows(string_array)).to eq({row0: ["O."], row1: ["OO"], row2: [".."]})
+    end
+  end
  
 end
