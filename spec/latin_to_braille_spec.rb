@@ -2,7 +2,6 @@ require './lib/latin_to_braille'
 describe LatinToBraille do
 
   describe '.translate(file)' do
-
     describe 'single lowercase characters and spaces' do
       it 'translates a space' do
         string = ' '
@@ -68,7 +67,7 @@ describe LatinToBraille do
     end
 
     describe 'combination of upcase, downcase, & nums' do
-      it 'translates 1Hello 2World' do
+      it 'translates 1Hello World' do
         string = '1Hello World'
         expect(LatinToBraille.translate(string)).to eq(".OO...O.O.O.O.O......OO.O.O.OO\n.O....OO.OO.O..O....OO.OOOO..O\nOO...O....O.O.O....O.OO.O.O...")
       end
@@ -77,7 +76,6 @@ describe LatinToBraille do
  
 
   describe 'adding special char before capital letters with .capfilter' do
-
     it 'can add upcase character for a letter' do
       string = 'H'
       expect(LatinToBraille.capfilter(string)).to eq('^h')
@@ -92,7 +90,6 @@ describe LatinToBraille do
       string = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
       expect(LatinToBraille.capfilter(string)).to eq('^a^b^c^d^e^f^g^h^i^j^k^l^m^n^o^p^q^r^s^t^u^v^w^x^y^z')
     end
-
   end
 
   describe 'adding special char before numbers with .numfilter' do
@@ -120,9 +117,7 @@ describe LatinToBraille do
   end
 
   describe '.paragraph_create' do
-
     describe 'its helper methods' do
-
       it 'can push rows' do
         row_hash = { row0: [], row1: [], row2: [], paragraph: []}
         char = 'a'
@@ -146,7 +141,6 @@ describe LatinToBraille do
     end
 
     describe 'creating a paragraph' do
-      
       it 'creates a string with braille lines' do
         string = 'a^a§a'
         expect(LatinToBraille.paragraph_create(string)).to eq("O...O..OO.\n.......O..\n...O..OO..")
