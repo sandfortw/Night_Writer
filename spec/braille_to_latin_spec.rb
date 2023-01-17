@@ -60,4 +60,20 @@ describe BrailleToLatin do
 
     end
   end
+
+  describe '.transformed_char(char, index, string)' do
+    it 'can return a capital letter' do
+      string = '^a'
+      char = 'a'
+      index = 1
+      expect(BrailleToLatin.transformed_char(char, index, string)).to eq('A')
+    end
+
+    it 'can return a number' do
+      string = '§a'
+      char = 'a'
+      index = 1
+      expect(BrailleToLatin.transformed_char(char, index, string)).to eq('1')
+    end
+  end
 end
