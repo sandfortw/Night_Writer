@@ -119,4 +119,29 @@ describe LatinToBraille do
     end
   end
 
+  describe '.paragraph_create' do
+
+    describe 'its helper methods' do
+
+      it 'can push rows' do
+        row_hash = { row0: [], row1: [], row2: [], paragraph: []}
+        char = 'a'
+        expect(LatinToBraille.row_push(row_hash, char)).to eq({ row0: ['O.'], row1: ['..'], row2: ['..'], paragraph: []})
+      end
+
+      it 'can clear rows' do
+        row_hash = { row0: ['O.'], row1: ['..'], row2: ['..'], paragraph: []}
+
+      end
+
+      xit 'can push rows into a "paragraph" array' do
+        row_hash = { row0: [], row1: [], row2: [], paragraph: []}
+      end
+
+      xit 'can push rows into a paragraph and clear existing rows' do
+        row_hash = { row0: [], row1: [], row2: [], paragraph: []}
+      end
+    end
+  end
+
 end
