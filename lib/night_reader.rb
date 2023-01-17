@@ -9,4 +9,4 @@ string_arr = IO.readlines(file0)
 file1 = File.open("./data/#{new_file_name}", 'w')
 
 file1.write(BrailleToLatin.translate(string_arr))
-p "Created '#{new_file_name}' containing #{string_arr.length} characters"
+p "Created '#{new_file_name}' containing #{BrailleToLatin.translate(string_arr).length} characters"
