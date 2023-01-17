@@ -20,22 +20,24 @@ class BrailleToLatin
     @dictionary[braille.join] = latin
   end
 
-
   def self.unfilter(string)
-    new_string = []
-    chr_arr = string.chars
-    chr_arr.each_with_index do |char, index|
-      if chr_arr[index-1] == '^'
-        new_string << char.upcase
-      elsif chr_arr[index-1] == '§'
-        new_string << @numdict[char]
-      else
-        new_string << char unless char == '§' || char == '^'
-      end
+    new_string = ""
+    string.chars.each_with_index do |char, index|
+      transformed = transformed_char(char, index, string) 
+      new_string << transformed unless transformed.nil?
     end
-    new_string.join
+    new_string
   end
-
+  
+  def self.transformed_char(char, index, string)
+    if string[index-1] == '^'
+      char.upcase
+    elsif string[index-1] == '§'
+      @numdict[char]
+    else
+      char unless char == '§' || char == '^'
+    end
+  end
 
   def self.translate(string_arr)
     string_arr2 = string_arr.map{|line| line.chomp}
