@@ -134,12 +134,14 @@ describe LatinToBraille do
         expect(LatinToBraille.row_clear(row_hash)).to eq({ row0: [], row1: [], row2: [], paragraph: []})
       end
 
-      xit 'can push rows into a "paragraph" array' do
-        row_hash = { row0: [], row1: [], row2: [], paragraph: []}
+      it 'can push rows into a "paragraph" array' do
+        row_hash = { row0: ['O.'], row1: ['..'], row2: ['..'], paragraph: []}
+        expect(LatinToBraille.paragraph_push(row_hash)).to eq({ row0: ['O.'], row1: ['..'], row2: ['..'], paragraph: ["O.\n..\n.."]})
       end
 
-      xit 'can push rows into a paragraph and clear existing rows' do
-        row_hash = { row0: [], row1: [], row2: [], paragraph: []}
+      it 'can push rows into a paragraph and clear existing rows' do
+        row_hash = { row0: ['O.'], row1: ['..'], row2: ['..'], paragraph: []}
+        expect(LatinToBraille.push_and_clear(row_hash)).to eq({ row0: [], row1: [], row2: [], paragraph: ["O.\n..\n.."]})
       end
     end
   end
