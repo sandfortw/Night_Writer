@@ -52,4 +52,12 @@ describe BrailleToLatin do
       expect(BrailleToLatin.generate_chars(hash)).to eq("h")
     end
   end
+
+  describe '.break_row_by_2s(row)' do
+    it 'takes a row of braille and breaks it into 2-char chunks' do
+      row = ["..OO..OO..OO"]
+      expect(BrailleToLatin.break_row_by_2s(row)).to eq(["..", "OO", "..", "OO", "..", "OO"])
+
+    end
+  end
 end
