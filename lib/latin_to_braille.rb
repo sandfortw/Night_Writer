@@ -60,9 +60,9 @@ class LatinToBraille
   def self.capfilter(string)
     new_string = []
     string.each_char do |c|
-      if @dictionary.keys.include?(c)
-      new_string << '^' if /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.match?(c)
-      new_string << c.downcase
+      if @dictionary.keys.include?(c.downcase)
+        new_string << '^' if /[ABCDEFGHIJKLMNOPQRSTUVWXYZ]/.match?(c)
+        new_string << c.downcase
       end
     end
     new_string.join
