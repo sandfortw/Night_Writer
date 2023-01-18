@@ -73,6 +73,11 @@ describe LatinToBraille do
         string = '1Hello World'
         expect(LatinToBraille.translate(string)).to eq(".OO...O.O.O.O.O......OO.O.O.OO\n.O....OO.OO.O..O....OO.OOOO..O\nOO...O....O.O.O....O.OO.O.O...")
       end
+
+      it 'big test' do
+        string = " !',-.?abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        expect(LatinToBraille.translate(string)).to eq("..O.O.OOOOO.OOOOO..O.OO.O.OOOOO.OOOOO..O.OO.O..OOOOOO...O...O...OO..OO..O...OO..\n....O....O.OO.OOOOO.OO..O....O.OO.OOOOO.OO..O.OO...O.O......O........O...O..O...\n......................O.O.O.O.O.O.O.O.O.O.OOOO.OOOOOOO.O...O...O...O...O...O...O\nOO..O....O...O..O...O...OO..OO..O...OO..OO..O....O...O..O...O....O..OO..OO..O.\nOO..OO..O...OO......O........O...O..O...OO..OO..O...OO......O...OO.......O...O\n...O...O...O...OO..OO..OO..OO..OO..OO..OO..OO..OO..OO..OOO.OOO.O.O.OOO.OOO.OOO")
+      end
     end
   end
  
